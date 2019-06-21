@@ -1,10 +1,11 @@
 # µC Compiler
-A simple compiler for the [µC programming language](https://www.it.uu.se/katalog/aleji304/CompilersProject/uc.html).
+A simple [µC programming language](https://www.it.uu.se/katalog/aleji304/CompilersProject/uc.html) compiler for Java Assembly Code Generation.
+
+The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.com/c/ANSI-C-grammar-y.html) basically.
 
 ## Prerequisite
 * Environment
     - Linux (Ubuntu 16.04 LTS (or later)
-
 * Lexical analyzer (Flex) and syntax analyzer (Bison):
     ```
     sudo apt-get install flex bison
@@ -37,8 +38,8 @@ A simple compiler for the [µC programming language](https://www.it.uu.se/katalo
 - µC program:
     ```
     int foo(int a) {
-    a += 6;
-    return a;
+        a += 6;
+        return a;
     }
 
     void lol(int a) {
@@ -47,10 +48,10 @@ A simple compiler for the [µC programming language](https://www.it.uu.se/katalo
     }
 
     void main(){
-    int a;
-    a = foo(4);
-    lol(a);
-    return;
+        int a;
+        a = foo(4);
+        lol(a);
+        return;
     }
 
     ```
@@ -100,3 +101,5 @@ A simple compiler for the [µC programming language](https://www.it.uu.se/katalo
 
 ## Work flow
 ![](https://i.imgur.com/2XDz97R.png)
+
+### STAR this repo if you like it!
