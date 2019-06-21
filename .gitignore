@@ -1,0 +1,8 @@
+.vscode/
+*.o
+lex.yy.c
+y.tab.c 
+y.tab.h 
+uc_compiler.j 
+uc_compiler.class
+myparser
