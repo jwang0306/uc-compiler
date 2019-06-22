@@ -1,5 +1,5 @@
-# µC Compiler
-A simple [µC programming language](https://www.it.uu.se/katalog/aleji304/CompilersProject/uc.html) compiler for Java Assembly Code Generation.
+# µC Parser
+A simple parser for [µC programming language](https://www.it.uu.se/katalog/aleji304/CompilersProject/uc.html).
 
 The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.com/c/ANSI-C-grammar-y.html) basically.
 
@@ -10,33 +10,20 @@ The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.co
     ```
     sudo apt-get install flex bison
     ```
-* Java Virtual Machine (JVM):
-    ```
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install default-jre
-    ```
 
 ## Usage
 1. compile
     ```
     make
     ```
-2. generate java asembly code
+2. parser the input µC program
     ```
     ./myparser < ./example_input/xxx.c
     ```
-3. translate to java bytecode
-    ```
-    java -jar jasmin.jar uc_compiler.j
-    ```
-4. run by JVM and output the executed result
-    ```
-    java uc_compiler
-    ```
+
 ## Example
 - µC program:
-    ```
+    ```C
     int foo(int a) {
         a += 6;
         return a;
@@ -56,50 +43,50 @@ The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.co
 
     ```
 
-- generated java asembly code
+- parsing result
     ```
-    .class public uc_compiler
-    .super java/lang/Object
-    .method public static foo(I)I
-    .limit stack 50
-    .limit locals 50
-        ldc 6
-        iload 0
-        swap
-        iadd
-        istore 0
-        iload 0
-        ireturn
-    .end method
-    .method public static lol(I)V
-    .limit stack 50
-    .limit locals 50
-        iload 0
-        getstatic java/lang/System/out Ljava/io/PrintStream;
-        swap
-        invokevirtual java/io/PrintStream/println(I)V
-        return
-    .end method
-    .method public static main([Ljava/lang/String;)V
-    .limit stack 50
-    .limit locals 50
-        ldc 0
-        istore 0
-        ldc 4
-        invokestatic uc_compiler/foo(I)I
-        istore 0
-        iload 0
-        invokestatic uc_compiler/lol(I)V
-        return
-    .end method
+    1:
+    2: int foo(int a) {
+    3:    a += 6;
+    4:    return a;
+    5: }
+
+    Index     Name      Kind        Type      Scope     Attribute 
+
+    0         a         parameter   int       1         
+
+    6:
+    7: void lol(int a) {
+    8:     print(a);
+    9:      return;
+    10: }
+
+    Index     Name      Kind        Type      Scope     Attribute 
+
+    0         a         parameter   int       1         
+
+    11:
+    12: void main(){
+    13:    int a;
+    14:    a = foo(4);
+    15:    lol(a);
+    16:    return;
+    17: }
+
+    Index     Name      Kind        Type      Scope     Attribute 
+
+    0         a         variable    int       1         
+
+
+    Index     Name      Kind        Type      Scope     Attribute 
+
+    0         foo       function    int       0         int
+    1         lol       function    void      0         int
+    2         main      function    void      0         
+
+
+    Total lines: 17
 
     ```
-- executed result
-    ```
-    10
-    ```
-
-## Work flow
-![](https://i.imgur.com/2XDz97R.png)
 
 ### STAR this repo if you like it!
