@@ -1,26 +1,19 @@
-CC = gcc -g
-YFLAG = -d
-FNAME = uc_compiler
-PARSER = myparser
-OBJECT = lex.yy.c y.tab.c y.tab.h ${FNAME}.j ${FNAME}.class
+CC=gcc
+YFLAG=-d -v
+FNAME=uc_compiler
+EXE=myparser
 
-all: y.tab.o lex.yy.o
-	@${CC} -o ${PARSER} y.tab.o lex.yy.o
+compile: scanner parser
+	${CC} lex.yy.c y.tab.c -o ${EXE}
 
-%.o: %.c
-	@${CC} -c $<
+scanner:
+	lex ${FNAME}.l
 
-lex.yy.c:
-	@lex ${FNAME}.l
+parser: 
+	yacc ${YFLAG} ${FNAME}.y
 
-y.tab.c:
-	@yacc ${YFLAG} ${FNAME}.y
-
-test:
-	@./${PARSER} < ./example_input/basic_declaration.c
-	@echo -e "\n\033[1;33mmain.class output\033[0m"
-	@java -jar jasmin.jar ${FNAME}.j
-	@java ${FNAME} 
+test: compile
+	./${EXE} < input/zero_error.c
 
 clean:
-	rm -f *.o ${PARSER} ${OBJECT} 
+	rm ${EXE} y.tab* lex.* y.output

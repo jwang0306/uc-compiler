@@ -45,48 +45,46 @@ The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.co
 
 - parsing result
     ```
-    1:
-    2: int foo(int a) {
-    3:    a += 6;
-    4:    return a;
-    5: }
+    1: int foo(int a) {
+    2:    a += 6;
+    3:    return a;
+    4: }
 
     Index     Name      Kind        Type      Scope     Attribute 
 
-    0         a         parameter   int       1         
+    0         a         parameter   void      1         
 
-    6:
-    7: void lol(int a) {
-    8:     print(a);
-    9:      return;
-    10: }
-
-    Index     Name      Kind        Type      Scope     Attribute 
-
-    0         a         parameter   int       1         
-
-    11:
-    12: void main(){
-    13:    int a;
-    14:    a = foo(4);
-    15:    lol(a);
-    16:    return;
-    17: }
+    5:
+    6: void lol(int a) {
+    7:     print(a);
+    8:      return;
+    9: }
 
     Index     Name      Kind        Type      Scope     Attribute 
 
-    0         a         variable    int       1         
+    0         a         parameter   void      1         
+
+    10:
+    11: void main(){
+    12:    int a;
+    13:    a = foo(4);
+    14:    lol(a);
+    15:    return;
+    16: }
+
+    Index     Name      Kind        Type      Scope     Attribute 
+
+    0         a         variable    void      1         
 
 
     Index     Name      Kind        Type      Scope     Attribute 
 
-    0         foo       function    int       0         int
-    1         lol       function    void      0         int
+    0         foo       function    void      0         void
+    1         lol       function    void      0         void
     2         main      function    void      0         
 
 
-    Total lines: 17
-
+    Total lines: 16
     ```
 
 ### STAR this repo if you like it!
