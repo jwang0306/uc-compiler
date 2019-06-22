@@ -16,7 +16,7 @@ The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.co
     ```
     make
     ```
-2. parser the input µC program
+2. parse the input µC program
     ```
     ./myparser < ./example_input/xxx.c
     ```
