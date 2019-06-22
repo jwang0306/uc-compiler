@@ -1,7 +1,5 @@
-# µC Parser
-A simple parser for [µC programming language](https://www.it.uu.se/katalog/aleji304/CompilersProject/uc.html).
-
-The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.com/c/ANSI-C-grammar-y.html) basically.
+# µC Scanner
+A simple scanner for [µC programming language](https://www.it.uu.se/katalog/aleji304/CompilersProject/uc.html).
 
 ## Prerequisite
 * Environment
@@ -16,9 +14,9 @@ The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.co
     ```
     make
     ```
-2. parser the input µC program
+2. scan the input µC program
     ```
-    ./myparser < ./example_input/xxx.c
+    ./myscanner < ./example_input/xxx.c
     ```
 
 ## Example
@@ -43,48 +41,65 @@ The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.co
 
     ```
 
-- parsing result
+- scanning result
     ```
-    1: int foo(int a) {
-    2:    a += 6;
-    3:    return a;
-    4: }
+    int      INT
+    foo      ID
+    (        LB
+    int      INT
+    a        ID
+    )        RB
+    {        LCB
+    a        ID
+    +=       ADDASGN
+    6        I_CONST
+    ;        SEMICOLON
+    return   RET
+    a        ID
+    ;        SEMICOLON
+    }        RCB
+    void     VOID
+    lol      ID
+    (        LB
+    int      INT
+    a        ID
+    )        RB
+    {        LCB
+    print    PRINT
+    (        LB
+    a        ID
+    )        RB
+    ;        SEMICOLON
+    return   RET
+    ;        SEMICOLON
+    }        RCB
+    void     VOID
+    main     ID
+    (        LB
+    )        RB
+    {        LCB
+    int      INT
+    a        ID
+    ;        SEMICOLON
+    a        ID
+    =        ASGN
+    foo      ID
+    (        LB
+    4        I_CONST
+    )        RB
+    ;        SEMICOLON
+    lol      ID
+    (        LB
+    a        ID
+    )        RB
+    ;        SEMICOLON
+    return   RET
+    ;        SEMICOLON
+    }        RCB
 
-    Index     Name      Kind        Type      Scope     Attribute 
+    Parse over, the line number is 16.
 
-    0         a         parameter   void      1         
-
-    5:
-    6: void lol(int a) {
-    7:     print(a);
-    8:      return;
-    9: }
-
-    Index     Name      Kind        Type      Scope     Attribute 
-
-    0         a         parameter   void      1         
-
-    10:
-    11: void main(){
-    12:    int a;
-    13:    a = foo(4);
-    14:    lol(a);
-    15:    return;
-    16: }
-
-    Index     Name      Kind        Type      Scope     Attribute 
-
-    0         a         variable    void      1         
-
-
-    Index     Name      Kind        Type      Scope     Attribute 
-
-    0         foo       function    void      0         void
-    1         lol       function    void      0         void
-    2         main      function    void      0         
-
-
-    Total lines: 16
+    comment: 0 lines
     ```
 
 ### STAR this repo if you like it!

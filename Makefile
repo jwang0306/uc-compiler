@@ -1,19 +1,15 @@
 CC=gcc
-YFLAG=-d -v
 FNAME=uc_compiler
-EXE=myparser
+EXE=myscanner
 
-compile: scanner parser
-	${CC} lex.yy.c y.tab.c -o ${EXE}
+compile: scanner
+	@${CC} lex.yy.c -o ${EXE}
 
-scanner:
-	lex ${FNAME}.l
+scanner: 
+	@lex ${FNAME}.l
 
-parser: 
-	yacc ${YFLAG} ${FNAME}.y
-
-test: compile
-	./${EXE} < input/zero_error.c
+basic_test: compile
+	@./${EXE} < ./example_input/input/basic_function.c
 
 clean:
-	rm ${EXE} y.tab* lex.* y.output
+	@rm ${EXE} lex.*
