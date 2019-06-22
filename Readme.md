@@ -3,6 +3,8 @@ A simple [µC programming language](https://www.it.uu.se/katalog/aleji304/Compil
 
 The grammar used here is based on [ANSI C Yacc grammar rules](http://www.quut.com/c/ANSI-C-grammar-y.html) basically.
 
+You can switch branches to see how it was built from scanner to parser, and finally a compiler.
+
 ## Prerequisite
 * Environment
     - Linux (Ubuntu 16.04 LTS (or later)
